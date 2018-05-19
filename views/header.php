@@ -10,14 +10,21 @@
         
     </head>
     <body>
-        
+        <?php Session::init(); ?>
         <div id="header">
             
             <p>header</p>
             
             <a href="<?php echo URL; ?>index">Index</a>
             <a href="<?php echo URL; ?>help">Help</a>
+           
+            
+           
             <a href="<?php echo URL; ?>login">Login</a>
+            
+           
+            <a href="<?php echo URL; ?>post/logout">Logout</a>
+            
             
         </div>
         

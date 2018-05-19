@@ -6,7 +6,7 @@ class View {
         //echo "this is the view <br>";
     }
 
-    public function render($name) {
+    public function render($name, $objects = null) {
 //(, $dont_include = false) {
 
 
