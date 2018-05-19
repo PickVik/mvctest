@@ -1,14 +1,22 @@
 <?php
 
+class Index extends Controller {
 
-class Index extends Controller{
-
-    
     function __construct() {
         parent::__construct();
-        echo "we are in index";
+        
     }
 
+    
+     function index(){
+         echo "inside index";
+        $this->view->render('index/index');
+    }
+    
+    function details(){
+        $this->view->render('index/index');
+    }
+    
 }
 
 ?>
