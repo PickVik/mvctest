@@ -1,4 +1,4 @@
-+<?php
+<?php
 
 //Use autoloader here
 require 'libs/bootstrap.php';

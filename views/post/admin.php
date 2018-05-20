@@ -1,5 +1,7 @@
-<p>Post - Welcome admin</p>
 
+
+<h1>Post - Welcome admin</h1>
+<a href='create_newarticle'>New Post</a>
 <p>Here is a list of all posts</p>
 
 <?php foreach($objects as $article) { ?>

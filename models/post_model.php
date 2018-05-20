@@ -16,7 +16,8 @@ class Post_Model extends Model {
         parent::__construct();
     }*/
     
-    function __construct($article_id=0, $title=0, $body=0, $slug=0, $image=0, $user_id=0, $date_created=0, $last_updated=0, $published=0) {
+    function __construct($article_id=0, $title=0, $body=0, $slug=0, $image=0, $user_id=0, $date_created=0, 
+            $last_updated=0, $published=0) {
         parent::__construct();
         $this->article_id = $article_id;
         $this->title = $title;
@@ -69,13 +70,28 @@ class Post_Model extends Model {
         $req->execute();
 
     }
-/*
-    public static function add() {
-        $db = Db::getInstance();
-        $req = $db->prepare("Insert into product(name, price) values (:name, :price)");
-        $req->bindParam(':name', $name);
-        $req->bindParam(':price', $price);
 
+    //$article_id, $title, $body, $slug, $image, $user_id, $date_created,$last_updated, $published
+
+    public function add_article($article_id, $title, $body, $slug, $image, $user_id, $date_created,$last_updated, $published){
+        
+        $req = $this->db->prepare("INSERT into article(title, body, slug, 
+                            image, user_id) 
+                            VALUES (:title, :body, :slug, 
+                            :image, :user_id)");
+       
+        $req->bindParam(':title', $title);
+        $req->bindParam(':body', $body);
+        $req->bindParam(':slug', $slug);
+        $req->bindParam(':image', $image);
+        $req->bindParam(':user_id', $user_id);
+         
+        $bb = $req->execute();
+        
+       
+    }
+        
+        /*
 // set parameters and execute
         if (isset($_POST['name']) && $_POST['name'] != "") {
             $filteredName = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -134,5 +150,16 @@ class Post_Model extends Model {
         // the query was prepared, now replace :id with the actual $id value
         $req->execute(array('id' => $id));
     }*/
+
+}
+
+class Topic extends Model {
+    
+    public $topic_id;
+    public $topic_name;
+
+    function __construct() {
+        
+    }
 
 }
