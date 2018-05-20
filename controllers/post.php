@@ -68,9 +68,9 @@ class Post extends Controller {
 
         function create_newarticle(){
 
+        $topics = $this->model->topic->get_all_topic();
 
-
-        $this->view->render('post/newarticle');
+        $this->view->render('post/newarticle', $topics);
 
 
         }
@@ -78,10 +78,11 @@ class Post extends Controller {
         function add_article(){
        
        
-        $this->model->add_article($_GET['article_id'], $_GET['title'], $_GET['body'], $_GET['slug'], 
-                   $_GET['image'], $_GET['user_id'], $_GET['date_created'], $_GET['last_updated'], $_GET['published']);
+        $this->model->add_article($_GET['title'], $_GET['body'], $_GET['slug'], 
+                   $_GET['image'], $_GET['user_id'], $_GET['topic']);
+        
 
-        header('location: admin');
+        //header('location: admin');
         
       
         }

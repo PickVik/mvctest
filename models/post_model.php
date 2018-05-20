@@ -28,6 +28,7 @@ class Post_Model extends Model {
         $this->date_created = $date_created;
         $this->last_updated = $last_updated;
         $this->published = $published;
+        $this->topic = new Topic;
     }
 
     public function show_all() {
@@ -73,7 +74,7 @@ class Post_Model extends Model {
 
     //$article_id, $title, $body, $slug, $image, $user_id, $date_created,$last_updated, $published
 
-    public function add_article($article_id, $title, $body, $slug, $image, $user_id, $date_created,$last_updated, $published){
+    public function add_article($title, $body, $slug, $image, $user_id, $topic_id){
         
         $req = $this->db->prepare("INSERT into article(title, body, slug, 
                             image, user_id) 
@@ -86,7 +87,23 @@ class Post_Model extends Model {
         $req->bindParam(':image', $image);
         $req->bindParam(':user_id', $user_id);
          
-        $bb = $req->execute();
+        $req->execute();
+        
+        
+        $article_id = $this->db->lastInsertId();
+        
+        $req1 = $this->db->prepare("INSERT into article_topic(article_id, topic_id)
+                                   VALUES(:article_id, :topic_id)");
+                
+        $req1->bindParam(':article_id', $article_id, PDO::PARAM_INT);
+        $req1->bindParam(':topic_id', $topic_id, PDO::PARAM_INT);
+         
+        $stm = $req1->execute();
+        if(!$stm){
+            print_r($this->db->errorInfo());
+        }
+        
+        
         
        
     }
@@ -158,7 +175,23 @@ class Topic extends Model {
     public $topic_id;
     public $topic_name;
 
-    function __construct() {
+    function __construct($topic_id=0, $topic_name=0) {
+        parent::__construct();
+        $this->topic_id = $topic_id;
+        $this->topic_name = $topic_name;
+        
+    }
+    
+    
+    
+    function get_all_topic(){
+        $list = [];
+        $req = $this->db->query('SELECT * FROM topic');
+        // we create a list of article objects from the database results
+        foreach ($req->fetchAll() as $topic) {
+            $list[] = new Topic($topic['topic_id'], $topic['topic_name']);
+        }
+        return $list;
         
     }
 

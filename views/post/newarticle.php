@@ -11,6 +11,24 @@
     <input type="hidden" name="date_created"/><br>
     <input type="hidden" name="last_updated"/><br>
     <input type="hidden" name="published"/><br>
+    
+    
+    Topic <select name="topic">
+        
+        
+        <?php foreach($objects as $topic) { ?>
+  
+         <?php echo $topic->topic_name; ?> &nbsp;
+   
+   
+
+    <option value="<?php echo $topic->topic_id ?>"><?php echo $topic->topic_name; ?></option>
+        
+   
+       <?php } ?> 
+    </select>
+    <br>
+   
    
     <label>Add new article</label><input type="submit" name="submit" />
     
